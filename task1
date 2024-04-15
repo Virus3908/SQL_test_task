@@ -1,0 +1,45 @@
+CREATE SCHEMA medical_billing;
+
+CREATE TABLE medical_billing.xml_buffer (xml_content TEXT);
+
+CREATE TABLE medical_billing.schet (
+    schet_id SERIAL PRIMARY KEY,
+    code_mo VARCHAR,
+    sluch_year INT,
+    sluch_month INT,
+    plat VARCHAR,
+    coments TEXT
+);
+
+CREATE TABLE medical_billing.sluch (
+    sluch_id UUID PRIMARY KEY,
+    schet_id INT REFERENCES medical_billing.schet(schet_id) ON DELETE CASCADE,
+    pr_nov INT,
+    vidpom INT,
+    moddate TIMESTAMP,
+    begdate TIMESTAMP,
+    enddate TIMESTAMP,
+    mo_custom VARCHAR,
+    lpubase INT,
+    id_stat INT,
+    smo VARCHAR,
+    smo_ok INT
+);
+
+CREATE TABLE medical_billing.usl (
+    usl_id UUID PRIMARY KEY,
+    sluch_id UUID REFERENCES medical_billing.sluch(sluch_id) ON DELETE CASCADE,
+    code_usl VARCHAR,
+    prvs INT,
+    dateusl DATE,
+    code_md VARCHAR,
+    skind INT,
+    typeoper INT,
+    podr VARCHAR,
+    profil INT,
+    det INT,
+    bedprof INT,
+    kol_usl INT
+);
+
+
